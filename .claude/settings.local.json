@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "PowerShell(Copy-Item *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(tar *)",
+      "Bash(Copy-Item *)",
+      "PowerShell(Get-Item *)",
+      "Bash(python -m http.server 5174 --bind 127.0.0.1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:5174/Invitation.html)",
+      "Bash(curl -s http://127.0.0.1:5174/Invitation.html)"
+    ]
+  }
+}

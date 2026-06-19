@@ -1,0 +1,22 @@
+{
+  "name": "Papu weds Babi",
+  "short_name": "Papu ♥ Babi",
+  "description": "A Royal Wedding Invitation — 5th June 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a0309",
+  "theme_color": "#1a0309",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
