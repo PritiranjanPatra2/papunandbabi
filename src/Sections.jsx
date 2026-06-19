@@ -40,15 +40,37 @@ export const SceneOpening = ({ data, onOpen }) => {
         </Reveal>
 
         <Reveal y={30} delay={0.6} duration={1.2}>
-          <div style={{ position: 'relative', margin: '36px auto 24px', width: 220, height: 220, color: 'var(--gold)' }}>
-            <div style={{ position: 'absolute', inset: 0, animation: 'spin 60s linear infinite' }}>
-              <Mandala size={220} opacity={0.55} />
+          <div style={{ position: 'relative', margin: '32px auto 20px', width: 200, height: 270 }}>
+            {/* Rotating Mandala background ornament */}
+            <div style={{ position: 'absolute', top: -30, left: -30, right: -30, bottom: -30, color: 'var(--gold)', opacity: 0.3, zIndex: 0, animation: 'spin 120s linear infinite', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Mandala size={260} opacity={0.6} />
             </div>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div className="f-script gold-grad" style={{ fontSize: 76, lineHeight: 1.3, letterSpacing: '0.02em', filter: 'drop-shadow(0 4px 20px color-mix(in oklab, var(--gold) 60%, transparent))', whiteSpace: 'nowrap' }}>
-                {groomInitial}<span style={{ fontSize: 42, opacity: 0.9, margin: '0 6px' }}>&amp;</span>{brideInitial}
-              </div>
+            
+            {/* The Arched Couple Portrait */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              borderRadius: '100px 100px 0 0',
+              overflow: 'hidden',
+              border: '2px solid var(--gold)',
+              boxShadow: '0 12px 36px rgba(0, 0, 0, 0.25)',
+              zIndex: 1,
+              backgroundColor: 'var(--bg-deep)'
+            }}>
+              <img src="/couple.jpg" alt={`${data.groomName} & ${data.brideName}`} 
+                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 12%' }} />
             </div>
+            
+            {/* Arch gold border ornament overlay */}
+            <div style={{
+              position: 'absolute',
+              inset: -4,
+              borderRadius: '104px 104px 0 0',
+              border: '1px solid color-mix(in oklab, var(--gold) 40%, transparent)',
+              pointerEvents: 'none',
+              zIndex: 2
+            }} />
           </div>
         </Reveal>
 
