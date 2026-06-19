@@ -484,7 +484,32 @@ export const SceneFinale = ({ data }) => {
           </p>
         </Reveal>
 
-        <Reveal delay={0.85}>
+        <Reveal delay={0.8} y={30}>
+          <div style={{ position: 'relative', margin: '32px auto 20px', width: 180, height: 240 }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '90px 90px 0 0',
+              overflow: 'hidden',
+              border: '2px solid var(--gold)',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2)',
+              backgroundColor: 'var(--bg-deep)'
+            }}>
+              <img src="/thankyou.jpg" alt="Thank You" 
+                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 15%' }} />
+            </div>
+            {/* Arch gold border overlay */}
+            <div style={{
+              position: 'absolute',
+              inset: -3,
+              borderRadius: '93px 93px 0 0',
+              border: '1px solid color-mix(in oklab, var(--gold) 40%, transparent)',
+              pointerEvents: 'none'
+            }} />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.95}>
           <div className="f-script gold-grad" style={{ fontSize: 'clamp(48px, 7vw, 84px)', marginTop: 32, lineHeight: 1.3 }}>
             With Love,<br />
             <span style={{ fontSize: '0.7em' }}>{data.groomName} &amp; {data.brideName}</span>
