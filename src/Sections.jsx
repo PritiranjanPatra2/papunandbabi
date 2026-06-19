@@ -371,6 +371,17 @@ export const SceneFamily = ({ data }) => {
           </div>
         </Reveal>
 
+        <Reveal y={30} delay={0.25}>
+          <div style={{ position: 'relative', margin: '36px auto 24px', width: 'calc(100% - 32px)', maxWidth: 460, aspectRatio: '3/2', overflow: 'hidden', borderRadius: '16px', border: '2px solid var(--gold)', boxShadow: '0 8px 30px rgba(0,0,0,0.2)' }}>
+            <img src="/families.jpg" alt="Two Families, One Celebration" 
+                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%' }} />
+            <CornerOrnament pos="tl" size={32} />
+            <CornerOrnament pos="tr" size={32} />
+            <CornerOrnament pos="bl" size={32} />
+            <CornerOrnament pos="br" size={32} />
+          </div>
+        </Reveal>
+
         <div className="two-col" style={{ marginTop: 48, gap: 32 }}>
           <Reveal y={30}>
             <div className="glass-card" style={{ textAlign: 'center', padding: '48px 24px', position: 'relative' }}>
