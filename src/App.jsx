@@ -88,8 +88,9 @@ const NavDots = () => {
   )
 }
 
-const MusicToggle = ({ on, onToggle }) => {
+const MusicPlayer = ({ on, onToggle }) => {
   const audioRef = React.useRef(null)
+  const [time, setTime] = React.useState({ current: 0, duration: 0 })
 
   React.useEffect(() => {
     if (!audioRef.current) return
@@ -100,13 +101,69 @@ const MusicToggle = ({ on, onToggle }) => {
     }
   }, [on])
 
+  React.useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    const updateTime = () => {
+      setTime({
+        current: audio.currentTime,
+        duration: audio.duration || 0
+      })
+    }
+    audio.addEventListener('timeupdate', updateTime)
+    audio.addEventListener('loadedmetadata', updateTime)
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime)
+      audio.removeEventListener('loadedmetadata', updateTime)
+    }
+  }, [])
+
+  const formatTime = (secs) => {
+    if (isNaN(secs)) return '0:00'
+    const m = Math.floor(secs / 60)
+    const s = Math.floor(secs % 60)
+    return `${m}:${s.toString().padStart(2, '0')}`
+  }
+
+  const progress = time.duration > 0 ? (time.current / time.duration) * 100 : 0
+
+  const handleProgressClick = (e) => {
+    const audio = audioRef.current
+    if (!audio || !time.duration) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const percent = clickX / rect.width
+    audio.currentTime = percent * time.duration
+  }
+
   return (
     <>
       <audio ref={audioRef} src="/kudmayi.mp3" loop preload="none" />
-      <button className={'music-toggle' + (on ? ' on' : '')} onClick={onToggle}
-              aria-label={on ? 'Pause music' : 'Play music'} title={on ? 'Pause music' : 'Play music'}>
-        {on ? <IconMusicOn style={{ width: 20, height: 20 }} /> : <IconMusicOff style={{ width: 20, height: 20 }} />}
-      </button>
+      <div className={'music-player-bar' + (on ? ' playing' : '')}>
+        <button className="play-btn" onClick={onToggle} aria-label={on ? 'Pause' : 'Play'}>
+          {on ? (
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ transform: 'translateX(1px)' }}>
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          )}
+        </button>
+        <div className="song-info">
+          <div className="song-title">Kudmayi</div>
+          <div className="song-subtitle">Wedding Background Music</div>
+        </div>
+        <div className="player-timeline" onClick={handleProgressClick}>
+          <div className="timeline-track">
+            <div className="timeline-progress" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="time-display">
+            {formatTime(time.current)} / {formatTime(time.duration)}
+          </div>
+        </div>
+      </div>
     </>
   )
 }
@@ -214,7 +271,7 @@ export default function App() {
       <ProgressBar />
       <NavDots />
       <FullscreenToggle />
-      <MusicToggle on={musicOn} onToggle={() => setMusicOn(v => !v)} />
+      <MusicPlayer on={musicOn} onToggle={() => setMusicOn(v => !v)} />
       <Cursor />
 
       <SceneOpening   data={data} onOpen={openInvitation} />
